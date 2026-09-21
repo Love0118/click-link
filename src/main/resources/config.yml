@@ -1,0 +1,13 @@
+enabled: true
+preview:
+  enabled: true
+  # Async chat waits at most this long; sync chat uses cached titles only.
+  wait-millis: 1500
+  timeout-millis: 3000
+  cache-minutes: 60
+  max-cache-entries: 512
+link:
+  color: "#55FFFF"
+  max-links: 5
+kakc:
+  protect-urls: true

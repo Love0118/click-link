@@ -1,0 +1,15 @@
+name: ClickLink
+version: ${project.version}
+main: com.love0118.clicklink.ClickLinkPlugin
+api-version: '1.21'
+author: Love0118
+softdepend: [KAKC]
+description: Clickable chat URLs with page titles and KAKC URL protection.
+commands:
+  clicklink:
+    description: Reload ClickLink
+    usage: /clicklink reload
+    permission: clicklink.admin
+permissions:
+  clicklink.admin:
+    default: op
