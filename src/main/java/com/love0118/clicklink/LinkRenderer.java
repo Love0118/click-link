@@ -2,6 +2,8 @@ package com.love0118.clicklink;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.TranslatableComponent;
+import net.kyori.adventure.text.TranslationArgument;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.TextColor;
@@ -18,6 +20,16 @@ final class LinkRenderer {
     private static Component render(Component message, Map<String, String> titles, TextColor color,
                                     int maxLinks, int[] count) {
         Component result = message.children(java.util.List.of());
+        if (message instanceof TranslatableComponent translated) {
+            // Paper's default chat renderer stores the display name and message as arguments, not children.
+            var arguments = new java.util.ArrayList<TranslationArgument>();
+            for (var argument : translated.arguments()) {
+                arguments.add(argument.value() instanceof Component component
+                        ? TranslationArgument.component(render(component, titles, color, maxLinks, count))
+                        : argument);
+            }
+            result = translated.arguments(arguments).children(java.util.List.of());
+        }
         if (message instanceof TextComponent text) {
             result = text.content("").children(java.util.List.of());
             int cursor = 0;

@@ -16,6 +16,25 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ChatPipelineTest {
+    @Test void defaultPaperRendererProducesClickableTitleInsideTranslationArgument() throws Exception {
+        var player = mock(Player.class);
+        String url = "https://example.com";
+        Component original = ChatRenderer.defaultRenderer().render(player, Component.text("Tester"),
+                Component.text(url + " 안녕하세요"), player);
+        Component rendered = LinkRenderer.render(original, java.util.Map.of(url, "Example"),
+                net.kyori.adventure.text.format.NamedTextColor.GREEN, 5);
+        var translated = assertInstanceOf(net.kyori.adventure.text.TranslatableComponent.class, rendered);
+        assertEquals("chat.type.text", translated.key());
+        assertEquals(Component.text("Tester"), translated.arguments().get(0).asComponent().compact());
+        Component body = translated.arguments().get(1).asComponent();
+        assertEquals("[Example] 안녕하세요", PlainTextComponentSerializer.plainText().serialize(body));
+        assertEquals("§6[§aExample§6]§f 안녕하세요", LegacyComponentSerializer.legacySection().serialize(body));
+        String json = GsonComponentSerializer.gson().serialize(rendered);
+        assertTrue(json.contains("open_url"));
+        assertTrue(json.contains(url));
+        assertTrue(json.contains("show_text"));
+    }
+
     @Test void preservesLegacyFormatterAndAddsClickEventsAfterSerialization() throws Exception {
         var plugin = mock(ClickLinkPlugin.class, CALLS_REAL_METHODS);
         var config = new YamlConfiguration();
