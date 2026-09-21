@@ -35,7 +35,7 @@ class ChatPipelineTest {
             var event = new AsyncChatEvent(false, player, viewers, renderer, message, message, null);
             plugin.onChat(event);
             Component result = event.renderer().render(player, Component.text("Tester"), event.message(), player);
-            assertEquals("[Rank] Tester: https://example.com 안녕하세요",
+            assertEquals("[Rank] Tester: [https://example.com] 안녕하세요",
                     PlainTextComponentSerializer.plainText().serialize(result));
             assertTrue(GsonComponentSerializer.gson().serialize(result).contains("open_url"));
             assertSame(viewers, event.viewers());

@@ -34,12 +34,12 @@ public final class ClickLinkPlugin extends JavaPlugin implements Listener {
     }
 
     private void configure() {
-        TextColor color = TextColor.fromHexString(getConfig().getString("link.color", "#55FFFF"));
+        TextColor color = TextColor.fromHexString(getConfig().getString("link.color", "#55FF55"));
         Settings old = settings;
         settings = new Settings(getConfig().getBoolean("enabled", true),
                 getConfig().getBoolean("preview.enabled", true), getConfig().getBoolean("kakc.protect-urls", true),
                 bounded("preview.wait-millis", 1500, 0, 3000), bounded("link.max-links", 5, 1, 20),
-                color == null ? NamedTextColor.AQUA : color,
+                color == null ? NamedTextColor.GREEN : color,
                 new PreviewService(bounded("preview.timeout-millis", 3000, 250, 10000),
                         bounded("preview.max-cache-entries", 512, 16, 10000),
                         bounded("preview.cache-minutes", 60, 1, 1440)));

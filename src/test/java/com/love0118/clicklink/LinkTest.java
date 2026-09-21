@@ -44,19 +44,21 @@ class LinkTest {
         String url = "https://www.youtube.com/watch?v=pM8_wnJ7JsE";
         String title = "Overdose (なとり) / 아오쿠모 린 (Aokumo Rin) Cover";
         var input = Component.text(url + " 안녕하세요", NamedTextColor.GREEN);
-        var result = LinkRenderer.render(input, Map.of(url, title), NamedTextColor.AQUA, 5);
+        var result = LinkRenderer.render(input, Map.of(url, title), NamedTextColor.GREEN, 5);
         assertEquals("[" + title + "] 안녕하세요", PlainTextComponentSerializer.plainText().serialize(result));
         assertEquals(NamedTextColor.GREEN, result.color());
         String json = GsonComponentSerializer.gson().serialize(result);
         assertTrue(json.contains("open_url"));
         assertTrue(json.contains("pM8_wnJ7JsE"));
         assertTrue(json.contains("show_text"));
+        assertEquals("§6[§a" + title + "§6]§f 안녕하세요",
+                net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().serialize(result));
     }
 
     @Test void fallbackKeepsUrlAndPunctuation() {
         String message = "See (https://example.com).";
         var result = LinkRenderer.render(Component.text(message), Map.of(), NamedTextColor.AQUA, 5);
-        assertEquals(message, PlainTextComponentSerializer.plainText().serialize(result));
+        assertEquals("See ([https://example.com]).", PlainTextComponentSerializer.plainText().serialize(result));
         assertTrue(GsonComponentSerializer.gson().serialize(result).contains("open_url"));
     }
 

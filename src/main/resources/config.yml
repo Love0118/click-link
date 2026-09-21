@@ -7,7 +7,8 @@ preview:
   cache-minutes: 60
   max-cache-entries: 512
 link:
-  color: "#55FFFF"
+  # &6[&aLink text&6]&f; no bold or underline.
+  color: "#55FF55"
   max-links: 5
 kakc:
   protect-urls: true

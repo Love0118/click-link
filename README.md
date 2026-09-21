@@ -1,6 +1,8 @@
 # ClickLink
 
-Paper 채팅 URL을 클릭 가능한 링크로 표시하고, 사이트 제목을 가져올 수 있으면 **[제목]**으로 보여주는 플러그인입니다. KAKC 1.2와 함께 사용할 때 URL만 한글 변환에서 제외합니다.
+Paper 채팅 URL을 클릭 가능한 링크로 표시하고, 사이트 제목을 가져올 수 있으면 [제목]으로 보여주는 플러그인입니다. KAKC 1.2와 함께 사용할 때 URL만 한글 변환에서 제외합니다.
+
+기본 스타일은 &6[&a링크내용&6]&f입니다. 대괄호는 금색, 제목 또는 URL은 초록색이며 볼드·밑줄 없이 표시합니다. 링크 뒤 텍스트는 흰색으로 표시합니다. 기존 설정 파일이 있다면 link.color를 #55FF55로 바꾸고 /clicklink reload를 실행하세요.
 
 입력 예:
 
@@ -48,7 +50,7 @@ Paper 채팅 URL을 클릭 가능한 링크로 표시하고, 사이트 제목을
 | preview.timeout-millis | 3000 | 개별 HTTP 요청 제한 시간 |
 | preview.cache-minutes | 60 | 캐시 유지 시간 |
 | preview.max-cache-entries | 512 | 캐시 최대 항목 수 |
-| link.color | #55FFFF | 링크 색상 |
+| link.color | #55FF55 | 대괄호 안 링크 내용 색상 |
 | link.max-links | 5 | 메시지당 링크 표시·조회 상한 |
 | kakc.protect-urls | true | KAKC URL 보호 |
 
